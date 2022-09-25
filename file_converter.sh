@@ -13,7 +13,7 @@ read -p "Choose CRF value (0-53): " crf
 # Iterate trough array and convert all video files to mp4
 len=${#videos[@]}
 for (( i=0; i<$len; i++ )); do
-	# Create a name for converted file
+	# Update file extension of converted file
 	output=$(echo ${videos[$i]} | sed "s/.$format/_conv.mp4/g")
 
 	# Convert given video file

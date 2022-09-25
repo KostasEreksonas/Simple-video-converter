@@ -7,6 +7,8 @@ read -p "Enter the file format that you want to convert: " format
 readarray -d '' videos < <(find . -type f -name "*.$format" -print0)
 
 # Set arguments for ffmpeg video conversion
+read -p "Choose audio settings: " audio
+read -p "Choose video settings: " video
 read -p "Choose ffmpeg preset: " preset
 read -p "Choose CRF value (0-53): " crf
 
@@ -17,5 +19,5 @@ for (( i=0; i<$len; i++ )); do
 	output=$(echo ${videos[$i]} | sed "s/.$format/_conv.mp4/g")
 
 	# Convert given video file
-	ffmpeg -i ${videos[$i]} -c:a copy -c:v libx264 -preset $preset -crf $crf $output
+	ffmpeg -i ${videos[$i]} -c:a $audio -c:v $video -preset $preset -crf $crf $output
 done

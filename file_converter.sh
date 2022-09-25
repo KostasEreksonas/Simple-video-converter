@@ -2,7 +2,7 @@
 
 read -p "Enter the file format that you want to convert: " format
 
-# Find all files in current working directory with entered file format
+# Find all files in the current working directory with selected file format
 # Solution found at: https://stackoverflow.com/questions/23356779/how-can-i-store-the-find-command-results-as-an-array-in-bash
 readarray -d '' videos < <(find . -type f -name "*.$format" -print0)
 

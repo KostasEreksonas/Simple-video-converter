@@ -14,7 +14,7 @@ read -p "Choose CRF value (0-53): " crf
 len=${#videos[@]}
 for (( i=0; i<$len; i++ )); do
 	# Create a name for converted file
-	output=$(echo ${videos[$i]} | sed 's/.mkv/_conv.mp4/g')
+	output=$(echo ${videos[$i]} | sed "s/.$format/_conv.mp4/g")
 
 	# Convert given video file
 	ffmpeg -i ${videos[$i]} -c:a copy -c:v libx264 -preset $preset -crf $crf $output

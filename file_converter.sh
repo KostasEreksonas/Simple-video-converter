@@ -8,7 +8,7 @@ while true; do
 	readarray -d '' -O "${#videos[@]}" videos < <(find . -not -path "*/.*" -type f -name "*".$format -print0)
 
 	read -p "Do you want to add another file format to convert? (Y/N) " choice
-	if [ $choice == "N" ]; then
+	if [ $choice == "N" || $choice == "n" ]; then
 		break
 	fi
 done

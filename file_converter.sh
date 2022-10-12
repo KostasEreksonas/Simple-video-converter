@@ -28,4 +28,10 @@ for (( i=0; i<$len; i++ )); do
 
 	# Convert a given video file
 	ffmpeg -i ${videos[$i]} -c:a $audio -c:v $video -preset $preset -crf $crf $output
+
+	# Prompt user wether to delete an original video file
+	read -p "Do you want to delete an original file? (Y/N)" choice
+	if [ $choice == "Y" ]; then
+		rm ${videos[$i]}
+	fi
 done

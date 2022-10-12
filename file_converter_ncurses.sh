@@ -27,4 +27,9 @@ for (( i=0; i<$len; i++ )); do
 
 	# Convert a given video file
 	ffmpeg -i ${videos[$i]} -c:a $audio -c:v $video -preset $preset -crf $crf $output
+
+	dialog --title "Keeping original video file" --yesno "Do you want to keep original file?" 0 0
+	if [ $? == 1 ]; then
+		rm ${videos[$i]}
+	fi
 done

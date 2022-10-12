@@ -19,13 +19,13 @@ read -p "Choose video settings: " video
 read -p "Choose ffmpeg preset: " preset
 read -p "Choose CRF value (0-53): " crf
 
-# Iterate trough an array and convert all video files to mp4
+# Convert all found video files to mp4
 len=${#videos[@]}
 for (( i=0; i<$len; i++ )); do
-	# Save converted file with "_conv.mp4" extension instead of original one
+	# Give a converted video file an extension of "_conv.mp4"
 	extension="${videos[$i]##*.}"
 	output=$(echo ${videos[$i]} | sed "s/.$extension/_conv.mp4/g")
 
-	# Convert the given video file
+	# Convert a given video file
 	ffmpeg -i ${videos[$i]} -c:a $audio -c:v $video -preset $preset -crf $crf $output
 done

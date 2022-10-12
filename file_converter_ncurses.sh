@@ -18,13 +18,13 @@ video=$(dialog --stdout --title "Choose Video Settings" --inputbox "Enter settin
 preset=$(dialog --stdout --title "Choose Preset" --inputbox "Choose preset" 0 0)
 crf=$(dialog --stdout --title "Choose CRF Value" --inputbox "Choose CRF value" 0 0)
 
-# Iterate trough an array and convert all video files to mp4
+# Convert all given video files to mp4
 len=${#videos[@]}
 for (( i=0; i<$len; i++ )); do
-	# Save converted file with "_conv.mp4" extension instead of original one
+	# Give converted file an extension of "_conv.mp4"
 	extension="${videos[$i]##*.}"
 	output=$(echo ${videos[$i]} | sed "s/.$extension/_conv.mp4/g")
 
-	# Convert the given video file
+	# Convert a given video file
 	ffmpeg -i ${videos[$i]} -c:a $audio -c:v $video -preset $preset -crf $crf $output
 done

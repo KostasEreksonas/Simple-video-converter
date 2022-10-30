@@ -8,7 +8,7 @@ while true; do
 	readarray -d '' -O "${#videos[@]}" videos < <(find . -not -path "*/.*" -type f -name "*".$format -print0)
 
 	read -p "Do you want to add another file format to convert? (Y/N) " choice
-	if [ $choice == "N" || $choice == "n" ]; then break; fi
+	if [[ $choice == "N" || $choice == "n" ]]; then break; fi
 done
 
 # Set arguments for ffmpeg video conversion

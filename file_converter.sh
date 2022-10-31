@@ -6,7 +6,6 @@ while true; do
 	# Add all found videos with selected format to videos array
 	# Solution found at: https://stackoverflow.com/questions/23356779/how-can-i-store-the-find-command-results-as-an-array-in-bash
 	readarray -d '' -O "${#videos[@]}" videos < <(find . -not -path "*/.*" -type f -name "*".$format -print0)
-
 	read -p "Do you want to add another file format to convert? (Y/N) " choice
 	if [[ $choice == "N" || $choice == "n" ]]; then break; fi
 done

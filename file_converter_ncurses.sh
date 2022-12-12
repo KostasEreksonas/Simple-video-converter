@@ -12,9 +12,13 @@ done
 
 # Set arguments for ffmpeg video conversion
 audio=$(dialog --stdout --title "Choose Audio Settings" --inputbox "Enter settings for audio" 0 0)
+if [ -z $audio ]; then audio="${1:-copy}"; fi
 video=$(dialog --stdout --title "Choose Video Settings" --inputbox "Enter settings for video" 0 0)
+if [ -z $video ]; then video="${1:-libx264}"; fi
 preset=$(dialog --stdout --title "Choose Preset" --inputbox "Choose preset" 0 0)
+if [ -z $preset ]; then preset="${1:-medium}"; fi
 crf=$(dialog --stdout --title "Choose CRF Value" --inputbox "Choose CRF value" 0 0)
+if [ -z $crf ]; then crf="${1:-17}"; fi
 
 # Convert all given video files to mp4
 len=${#videos[@]}

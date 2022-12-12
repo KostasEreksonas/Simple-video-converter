@@ -10,7 +10,7 @@ while true; do
 	if [ $? == 1 ]; then break; fi
 done
 
-# Set arguments for ffmpeg video conversion
+# Set ffmpeg video conversion arguments and their defaults
 audio=$(dialog --stdout --title "Choose Audio Settings" --inputbox "Enter settings for audio" 0 0)
 if [ -z $audio ]; then audio="${1:-copy}"; fi
 video=$(dialog --stdout --title "Choose Video Settings" --inputbox "Enter settings for video" 0 0)

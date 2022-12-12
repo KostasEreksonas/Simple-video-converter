@@ -11,10 +11,14 @@ while true; do
 done
 
 # Set arguments for ffmpeg video conversion
-read -p "Choose audio settings: " audio
-read -p "Choose video settings: " video
-read -p "Choose ffmpeg preset: " preset
-read -p "Choose CRF value (0-53): " crf
+read -p "Choose audio settings (default: copy): " audio
+if [ -z $audio ]; then audio="${1:-copy}"; fi
+read -p "Choose video settings (default: libx264): " video
+if [ -z $video ]; then video="${1:-libx264}"; fi
+read -p "Choose ffmpeg preset (default: medium): " preset
+if [ -z $preset ]; then preset="${1:-medium}"; fi
+read -p "Choose CRF value (0-53, defult: 17): " crf
+if [ -z $crf ]; then crf="${1:-17}"; fi
 
 # Convert all found video files to mp4
 len=${#videos[@]}

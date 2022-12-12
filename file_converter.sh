@@ -12,18 +12,18 @@ done
 
 # Set ffmpeg video conversion arguments and their defaults
 read -p "Choose audio settings (default: copy): " audio
-if [ -z $audio ]; then audio="${1:-copy}"; fi
+if [ -z $audio ]; then audio="${audio:-copy}"; fi
 
 read -p "Choose video settings (default: libx264): " video
-if [ -z $video ]; then video="${1:-libx264}"; fi
+if [ -z $video ]; then video="${video:-libx264}"; fi
 
 read -p "Choose ffmpeg preset (default: medium): " preset
-if [ -z $preset ]; then preset="${1:-medium}"; fi
+if [ -z $preset ]; then preset="${preset:-medium}"; fi
 
 # CRF must be between 0 - 53
 while ! [[ $crf =~ ^[0-9]*$ && $crf -ge 0 && $crf -le 53 ]]; do
 	read -p "Choose CRF value (0-53, defult: 17): " crf
-	if [ -z $crf ]; then crf="${1:-17}"; fi
+	if [ -z $crf ]; then crf="${crf:-17}"; fi
 	printf "Please enter a crf value between 0 - 53\n$crf\n"
 done
 

@@ -21,7 +21,7 @@ read -p "Choose ffmpeg preset (default: medium): " preset
 if [ -z $preset ]; then preset="${1:-medium}"; fi
 
 # CRF must be between 0 - 53
-while ! [[ $crf =~ ^[0-9]*$ && $crf -gt 0 && $crf -le 53 ]]; do
+while ! [[ $crf =~ ^[0-9]*$ && $crf -ge 0 && $crf -le 53 ]]; do
 	read -p "Choose CRF value (0-53, defult: 17): " crf
 	if [ -z $crf ]; then crf="${1:-17}"; fi
 	printf "Please enter a crf value between 0 - 53\n$crf\n"

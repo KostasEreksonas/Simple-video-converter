@@ -10,15 +10,22 @@ while true; do
 	if [[ $choice == "N" || $choice == "n" ]]; then break; fi
 done
 
-# Set arguments for ffmpeg video conversion
+# Set ffmpeg video conversion arguments and their defaults
 read -p "Choose audio settings (default: copy): " audio
 if [ -z $audio ]; then audio="${1:-copy}"; fi
+
 read -p "Choose video settings (default: libx264): " video
 if [ -z $video ]; then video="${1:-libx264}"; fi
+
 read -p "Choose ffmpeg preset (default: medium): " preset
 if [ -z $preset ]; then preset="${1:-medium}"; fi
-read -p "Choose CRF value (0-53, defult: 17): " crf
-if [ -z $crf ]; then crf="${1:-17}"; fi
+
+# CRF must be between 0 - 53
+while ! [[ $crf =~ ^[0-9]*$ && $crf -gt 0 && $crf -le 53 ]]; do
+	read -p "Choose CRF value (0-53, defult: 17): " crf
+	if [ -z $crf ]; then crf="${1:-17}"; fi
+	printf "Please enter a crf value between 0 - 53\n$crf\n"
+done
 
 # Convert all found video files to mp4
 len=${#videos[@]}

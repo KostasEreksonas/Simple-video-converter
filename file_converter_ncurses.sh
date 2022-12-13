@@ -7,7 +7,7 @@ while true; do
 	# Solution found at: https://stackoverflow.com/questions/23356779/how-can-i-store-the-find-command-results-as-an-array-in-bash
 	readarray -d '' -O "${#videos[@]}" videos < <(find . -not -path "*/.*" -type f -name "*".$format -print0)
 	dialog --title "Choose File Format" --yesno "Do you want to add another file format to convert? (Y/N)" 0 0
-	if [ $? == 1 ]; then break; fi
+	if [ $? -eq 1 ]; then break; fi
 done
 
 # Restart a sequence of settings prompts if some are incorrect
@@ -48,5 +48,5 @@ for (( i=0; i<$len; i++ )); do
 	ffmpeg -i ${videos[$i]} -c:a $audio -c:v $video -preset $preset -crf $crf $output
 
 	dialog --title "Keeping original video file" --yesno "Do you want to keep original file?" 0 0
-	if [ $? == 1 ]; then rm ${videos[$i]}; fi
+	if [ $? -eq 1 ]; then rm ${videos[$i]}; fi
 done

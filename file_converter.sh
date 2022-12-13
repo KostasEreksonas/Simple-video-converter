@@ -21,11 +21,14 @@ read -p "Choose ffmpeg preset (default: medium): " preset
 if [ -z $preset ]; then preset="${preset:-medium}"; fi
 
 # CRF must be between 0 - 53
+crf=-1
 while ! [[ $crf =~ ^[0-9]*$ && $crf -ge 0 && $crf -le 53 ]]; do
 	read -p "Choose CRF value (0-53, defult: 17): " crf
 	if [ -z $crf ]; then crf="${crf:-17}"; fi
-	printf "Please enter a crf value between 0 - 53\n$crf\n"
+	printf "Please enter a crf value between 0 - 53\n"
 done
+
+printf "$audio\n$video\n$preset\n$crf\n"
 
 # Convert all found video files to mp4
 len=${#videos[@]}

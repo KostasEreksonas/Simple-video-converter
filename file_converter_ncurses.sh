@@ -21,6 +21,7 @@ preset=$(dialog --stdout --title "Choose Preset" --inputbox "Choose preset (defa
 if [ -z $preset ]; then preset="${1:-medium}"; fi
 
 # CRF must be between 0 - 53
+crf=-1
 while ! [[ $crf =~ ^[0-9]*$ && $crf -ge 0 && $crf -le 53 ]]; do
 	crf=$(dialog --stdout --title "Choose CRF Value" --inputbox "Choose CRF value (must be between 0 - 53, default: 17)" 0 0)
 	if [ -z $crf ]; then crf="${1:-17}"; fi

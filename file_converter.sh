@@ -1,14 +1,17 @@
 #!/bin/sh
 
-while true; do
-	read -p "Enter the file format that you want to convert: " format
+if [ -z $1 ]; then
+	while true; do
+		read -p "Enter the file format that you want to convert: " format
 
-	# Add all found videos with selected format to videos array
-	# Solution found at: https://stackoverflow.com/questions/23356779/how-can-i-store-the-find-command-results-as-an-array-in-bash
-	readarray -d '' -O "${#videos[@]}" videos < <(find . -not -path "*/.*" -type f -name "*".$format -print0)
-	read -p "Do you want to add another file format to convert? (Y/N) " choice
-	if [[ $choice -eq "N" || $choice -eq "n" ]]; then break; fi
-done
+		# Add all found videos with selected format to videos array
+		# Solution found at: https://stackoverflow.com/questions/23356779/how-can-i-store-the-find-command-results-as-an-array-in-bash
+		readarray -d '' -O "${#videos[@]}" videos < <(find . -not -path "*/.*" -type f -name "*".$format -print0)
+		read -p "Do you want to add another file format to convert? (Y/N) " choice
+		if [[ $choice -eq "N" || $choice -eq "n" ]]; then break; fi
+	done
+fi
+videos=$1
 
 # Set ffmpeg video conversion arguments and their defaults
 read -p "Choose audio settings (default: copy): " audio
@@ -27,8 +30,6 @@ while ! [[ $crf =~ ^[0-9]*$ && $crf -ge 0 && $crf -le 53 ]]; do
 	if [ -z $crf ]; then crf="${crf:-17}"; fi
 	printf "Please enter a crf value between 0 - 53\n"
 done
-
-printf "$audio\n$video\n$preset\n$crf\n"
 
 # Convert all found video files to mp4
 len=${#videos[@]}
